@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'SHS System | ' . $title)
+@section('title', 'SA Management System | ' . $title)
 @section('content')
 
     {{-- Content Wrapper. Contains page content --}}
@@ -37,7 +37,7 @@
                                                                 disabled="">{{ old('user_type') }}</option>
                                                             <option value="Admin">Admin</option>
                                                             <option value="User">User</option>
-                                                            <option value="Special">Special</option>
+                                                            <option value="Teacher">Teacher</option>
                                                         </select>
                                                     </div>
                                                 </div>

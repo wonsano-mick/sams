@@ -1,5 +1,5 @@
 @extends('layouts.auth.master')
-@section('title', 'Wonsano POS | Register User')
+@section('title', 'SA Management System | Register User')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

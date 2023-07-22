@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'SHS System | Users List')
+@section('title', 'SA Management System | Users List')
 @section('content')
 
     @include('sweetalert::alert')

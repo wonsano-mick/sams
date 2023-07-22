@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'SHS System | Home Page')
+@section('title', 'SA Management System | Home Page')
 @section('content')
     @include('sweetalert::alert')
     {{-- Main Content Starts --}}

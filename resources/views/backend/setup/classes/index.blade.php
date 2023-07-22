@@ -41,13 +41,11 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($classData as $Key => $class)
-                                                @php
-                                                    $formMasterName = optional($class->formMaster)->sur_name . ' ' . optional($class->formMaster)->other_names;
-                                                @endphp
                                                 <tr>
                                                     <td>{{ $Key + 1 }}</td>
                                                     <td>{{ $class->current_class }}</td>
-                                                    <td>{{ $formMasterName }}</td>
+                                                    <td>{{ optional($class->formMaster)->sur_name . ' ' . optional($class->formMaster)->other_names }}
+                                                    </td>
                                                     {{-- <td>
                                                         <a href="{{ route('students.edit', $class->id) }}"
                                                             class="btn btn-sm btn-warning mb-2"><i

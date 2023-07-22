@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'SHS System | ' . $editData->program)
+@section('title', 'SA Management System | ' . $editData->program)
 @section('content')
 
     {{-- Content Wrapper. Contains page content --}}

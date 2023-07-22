@@ -1,5 +1,5 @@
 @extends('layouts.auth.master')
-@section('title', 'SHS Management System | Log in')
+@section('title', 'SA Management System | Log in')
 @section('content')
     @include('sweetalert::alert')
     @php

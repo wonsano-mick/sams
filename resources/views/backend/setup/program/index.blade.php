@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'SHS System | Programs')
+@section('title', 'SA Management System| Programs')
 @section('content')
     @include('sweetalert::alert')
     {{-- Content Wrapper. Contains page content --}}

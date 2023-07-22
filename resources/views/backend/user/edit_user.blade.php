@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'SHS System | Edit User')
+@section('title', 'SA Management System | Edit User')
 @section('content')
 
     {{-- Content Wrapper. Contains page content --}}
@@ -36,7 +36,8 @@
                                                             <option value="" selected="" disabled="">Select User
                                                                 Role</option>
                                                             <option value="Admin"
-                                                                {{ $editData->user_type == 'Admin' ? 'Selected' : '' }}>Admin
+                                                                {{ $editData->user_type == 'Admin' ? 'Selected' : '' }}>
+                                                                Admin
                                                             </option>
                                                             <option value="User"
                                                                 {{ $editData->user_type == 'User' ? 'Selected' : '' }}>User

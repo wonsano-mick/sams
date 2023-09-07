@@ -53,7 +53,6 @@
                                                         <a href="{{ route('users.edit', $User->id) }}"
                                                             class="btn btn-sm btn-warning mb-2"><i
                                                                 data-feather="edit"></i></a>
-                                                        {{-- <a href="{{ route('users.delete',$User->id) }}" class="btn btn-md btn-danger mb-2" id="delete"><i data-feather="trash"></i> Delete</a> --}}
                                                     </td>
                                                     <td>
                                                         <form method="POST"

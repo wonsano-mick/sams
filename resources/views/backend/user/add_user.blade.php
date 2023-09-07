@@ -32,7 +32,7 @@
                                                 <div class="form-group">
                                                     <h5>User Role <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="user_type" id="select" class="form-control">
+                                                        <select name="user_type" id="userTypeSelect" class="form-control">
                                                             <option value="{{ old('user_type') }}" selected=""
                                                                 disabled="">{{ old('user_type') }}</option>
                                                             <option value="Admin">Admin</option>
@@ -42,7 +42,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6" id="otherNameField">
                                                 <div class="form-group">
                                                     <h5>Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -50,6 +50,24 @@
                                                             value="{{ old('name') }}" autocomplete>
                                                     </div>
                                                     <div class="form-control-feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" id="teacherNameField" style="display: none;">
+                                                <div class="form-group">
+                                                    <h5>Teacher Name <span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <select name="name" id="teacherSelect" class="form-control">
+                                                            <option disabled="yes" selected="no">Select Name</option>
+                                                            @php
+                                                                $staffData = App\Models\staff::get();
+                                                            @endphp
+                                                            @foreach ($staffData as $staff)
+                                                                <option value="{{ $staff->id }}">
+                                                                    {{ $staff->sur_name . ' ' . $staff->other_names }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

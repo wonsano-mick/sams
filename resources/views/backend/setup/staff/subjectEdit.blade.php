@@ -40,12 +40,12 @@
                                                                     style="color: red">*</span></th>
                                                             <th>Class<span style="color: red">*</span></th>
                                                             <th>Subject<span style="color: red">*</span></th>
-                                                            <th>
+                                                            {{-- <th>
                                                                 <button type="button"
                                                                     class="btn btn-sm btn-success add_more">
                                                                     <i data-feather="plus-circle"></i>
                                                                 </button>
-                                                            </th>
+                                                            </th> --}}
                                                         </tr>
                                                     </thead>
                                                     <tbody class="addMoreSubject">
@@ -81,12 +81,12 @@
                                                                     @endforeach
                                                                 </select>
                                                             </td>
-                                                            <td>
+                                                            {{-- <td>
                                                                 <button type="button" class="btn btn-sm btn-danger delete"
                                                                     disabled>
                                                                     <i data-feather="minus-circle"></i>
                                                                 </button>
-                                                            </td>
+                                                            </td> --}}
                                                         </tr>
                                                     </tbody>
                                                 </table>

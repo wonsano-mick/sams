@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('academic_year')->nullable();
             $table->string('term')->nullable();
+            $table->string('active')->default('No');
             $table->timestamps();
         });
     }

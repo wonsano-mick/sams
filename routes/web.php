@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\backend\setup\academicYear\AcademicYearController;
-use App\Http\Controllers\backend\setup\class\CurrentClassController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchoolInfoController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\backend\setup\sba\SBAController;
 use App\Http\Controllers\backend\setup\house\HouseController;
-use App\Http\Controllers\backend\setup\Program\ProgramController;
 use App\Http\Controllers\backend\setup\staff\StaffController;
+use App\Http\Controllers\backend\setup\Program\ProgramController;
 use App\Http\Controllers\backend\setup\student\StudentController;
 use App\Http\Controllers\backend\setup\subject\SubjectController;
+use App\Http\Controllers\backend\setup\class\CurrentClassController;
+use App\Http\Controllers\backend\setup\academicYear\AcademicYearController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +108,10 @@ Route::prefix('classes')->middleware('auth')->group(function () {
 Route::prefix('academics')->middleware('auth')->group(function () {
     Route::resource('/years', AcademicYearController::class);
     Route::get('/years', [AcademicYearController::class, 'index'])->name('academics.years');
+    Route::get('/sba', [SBAController::class, 'index'])->name('academics.sba');
+    Route::post('/sba/load', [SBAController::class, 'load'])->name('academics.sba.load');
+    Route::get('/sba/create', [SBAController::class, 'create'])->name('academics.sba.create');
+    Route::post('/sba/store', [SBAController::class, 'store'])->name('academics.sba.store');
 });
 
 /*==========================================================================

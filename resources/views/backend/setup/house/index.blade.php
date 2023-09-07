@@ -20,8 +20,10 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">List of Houses</h3>
-                                <button type="button" data-toggle="modal" data-target="#AddHouse"
-                                    class="btn btn-rounded btn-success mb-5" style="float: right">Add New House</button>
+                                @if (Auth::user()->user_type == 'Admin')
+                                    <button type="button" data-toggle="modal" data-target="#AddHouse"
+                                        class="btn btn-rounded btn-success mb-5" style="float: right">Add New House</button>
+                                @endif
                             </div>
                             {{-- box-header --}}
                             <div class="box-body">

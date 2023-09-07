@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Models\User;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,6 @@ class UserController extends Controller
 
     public function UserStore(Request $request)
     {
-
         $request->validate([
             'user_type' => 'required',
             'username' => 'bail|required|unique:users,username',
@@ -41,6 +41,13 @@ class UserController extends Controller
         $InsertData->username   = ucwords($request->username);
         $InsertData->email      = ucwords($request->email);
         $InsertData->password   = Hash::make($request->password);
+        if ($request->user_type === 'Teacher') {
+            $staff = Staff::find($request->name);
+            $InsertData->name = $staff->sur_name . ' ' . $staff->other_names;
+            $InsertData->staff_id   = $request->name;
+        } else {
+            $InsertData->name = ucwords($request->name);
+        }
 
         $InsertData->save();
 

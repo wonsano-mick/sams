@@ -32,7 +32,7 @@
                                                 <div class="form-group">
                                                     <h5>User Role <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="user_type" id="select" class="form-control">
+                                                        <select name="user_type" id="userTypeSelect" class="form-control">
                                                             <option value="" selected="" disabled="">Select User
                                                                 Role</option>
                                                             <option value="Admin"
@@ -42,11 +42,15 @@
                                                             <option value="User"
                                                                 {{ $editData->user_type == 'User' ? 'Selected' : '' }}>User
                                                             </option>
+                                                            <option value="Teacher"
+                                                                {{ $editData->user_type == 'Teacher' ? 'Selected' : '' }}>
+                                                                Teacher
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6" id="otherNameField">
                                                 <div class="form-group">
                                                     <h5>Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -54,6 +58,26 @@
                                                             value="{{ $editData->name }}" autocomplete>
                                                     </div>
                                                     <div class="form-control-feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" id="teacherNameField" style="display: none;">
+                                                <div class="form-group">
+                                                    <h5>Teacher Name <span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <select name="name" id="teacherSelect" class="form-control">
+                                                            <option value="{{ $editData->id }}">
+                                                                {{ $editData->sur_name . ' ' . $editData->other_names }}
+                                                            </option>
+                                                            @php
+                                                                $staffData = App\Models\staff::get();
+                                                            @endphp
+                                                            @foreach ($staffData as $staff)
+                                                                <option value="{{ $staff->id }}">
+                                                                    {{ $staff->sur_name . ' ' . $staff->other_names }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

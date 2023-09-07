@@ -23,8 +23,10 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Class List</h3>
-                                <a href="" data-toggle="modal" data-target="#AddClass"
-                                    class="btn btn-rounded btn-success mb-5" style="float: right">Add New Class</a>
+                                @if (Auth::user()->user_type == 'Admin')
+                                    <a href="" data-toggle="modal" data-target="#AddClass"
+                                        class="btn btn-rounded btn-success mb-5" style="float: right">Add New Class</a>
+                                @endif
                             </div>
                             {{-- box-header --}}
                             <div class="box-body">

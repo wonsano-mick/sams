@@ -30,6 +30,45 @@
     {{-- Select2 CSS  --}}
     <link href="{{ asset('frontend/vendor/css/select2.min.css') }}" rel="stylesheet">
 
+    <script>
+        window.onload = function() {
+            // Get all input elements with class "classWorkInput"
+            var inputElements = document.querySelectorAll('.classWorkInput');
+
+            // Add an event listener for each input element
+            inputElements.forEach(function(inputElement) {
+                inputElement.addEventListener('input', function() {
+                    var currentValue = parseInt(inputElement.value);
+                    var maxValue = parseInt(inputElement.getAttribute('max'));
+
+                    if (currentValue > maxValue) {
+                        inputElement.value = maxValue;
+                    }
+                });
+            });
+        };
+        window.onload = function() {
+            // Get all input elements with class "classWorkInput"
+            var inputElements = document.querySelectorAll('.examsScore');
+
+            // Add an event listener for each input element
+            inputElements.forEach(function(inputElement) {
+                inputElement.addEventListener('input', function() {
+                    var currentValue = parseInt(inputElement.value);
+                    var maxValue = parseInt(inputElement.getAttribute('max'));
+
+                    if (currentValue > maxValue) {
+                        inputElement.value = maxValue;
+                    }
+                });
+            });
+        };
+    </script>
+    <style>
+        #submitAssessmentButton {
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
@@ -224,6 +263,100 @@
                 $('.delete').prop('disabled', true);
             }
         });
+    </script>
+
+    <script>
+        // Get the user_type dropdown element
+        const userTypeDropdown = document.getElementById('userTypeSelect');
+
+        // Get the "Other Name" field div element
+        const otherNameField = document.getElementById('otherNameField');
+
+        // Get the "Teacher" select dropdown element
+        const teacherNameField = document.getElementById('teacherNameField');
+
+        // Add event listener to the user_type dropdown to show/hide the "Name" field based on selection
+        userTypeDropdown.addEventListener('change', function() {
+            const selectedValue = userTypeDropdown.value;
+            if (selectedValue === 'Teacher') {
+                teacherNameField.style.display = 'block';
+                otherNameField.style.display = 'none'; // Hide the "Other Name" field
+            } else {
+                teacherNameField.style.display = 'none';
+                otherNameField.style.display = 'block'; // Show the "Other Name" field
+            }
+        });
+    </script>
+    <script>
+        function calculatePosition(row) {
+            const totalScore = parseFloat(row.querySelector(".totalScore").value);
+            const rows = Array.from(row.parentElement.querySelectorAll("tr"));
+
+            // Sort the rows by totalScore in descending order
+            rows.sort((a, b) => {
+                const scoreA = parseFloat(a.querySelector(".totalScore").value);
+                const scoreB = parseFloat(b.querySelector(".totalScore").value);
+                return scoreB - scoreA; // Descending order
+            });
+
+            // Calculate and assign positions based on sorted order
+            let currentPosition = 1;
+            for (let i = 0; i < rows.length; i++) {
+                const currentRow = rows[i];
+                const currentScore = parseFloat(currentRow.querySelector(".totalScore").value);
+
+                if (i > 0) {
+                    const previousRow = rows[i - 1];
+                    const previousScore = parseFloat(previousRow.querySelector(".totalScore").value);
+                    if (currentScore < previousScore) {
+                        currentPosition = i + 1;
+                    }
+                }
+
+                currentRow.querySelector(".position").value = currentPosition;
+            }
+        }
+
+        function calculateRowScores(row) {
+            const classWorkInputs = row.querySelectorAll(".classWorkInput");
+            let sumClassWork = 0;
+
+            classWorkInputs.forEach(input => {
+                const value = parseFloat(input.value) || 0;
+                sumClassWork += value;
+            });
+
+            const scaledClassWork = (sumClassWork / (classWorkInputs.length * 15)) * 50;
+            row.querySelector(".scaledClassWork").value = scaledClassWork.toFixed(2);
+
+            const examsScore = parseFloat(row.querySelector(".examsScore").value) || 0;
+            const scaledExamsScore = (examsScore / 100) * 50;
+            row.querySelector(".scaledExamsScore").value = scaledExamsScore.toFixed(2);
+
+            const totalScore = scaledClassWork + scaledExamsScore;
+            row.querySelector(".totalScore").value = totalScore.toFixed(2);
+
+            calculatePosition(row);
+        }
+
+        function calculateAllRows() {
+            const rows = document.querySelectorAll("#dataTable tbody tr");
+            rows.forEach(row => {
+                calculateRowScores(row);
+            });
+        }
+
+        // Attach an event listener to recalculate when input changes
+        const classWorkInputs = document.querySelectorAll(".classWorkInput, .examsScore");
+        classWorkInputs.forEach(input => {
+            input.addEventListener("input", function() {
+                const row = input.closest("tr");
+                calculateRowScores(row);
+            });
+        });
+
+        // Calculate on page load
+        calculateAllRows();
     </script>
 </body>
 

@@ -23,8 +23,10 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">{{ $Class }} Students' List</h3>
-                                <a href="{{ route('students.create') }}" class="btn btn-rounded btn-success mb-5"
-                                    style="float: right">Add Student</a>
+                                @if (Auth::user()->user_type == 'Admin')
+                                    <a href="{{ route('students.create') }}" class="btn btn-rounded btn-success mb-5"
+                                        style="float: right">Add Student</a>
+                                @endif
                             </div>
                             {{-- box-header --}}
                             <div class="box-body">

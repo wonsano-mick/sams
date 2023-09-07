@@ -48,9 +48,14 @@ class AcademicYearController extends Controller
             'term' => ['required', new UniqueInputsMatch(AcademicYear::class)],
         ]);
 
+        $updateStatus  = AcademicYear::where('active', 'Yes')->update([
+            'active' => 'No'
+        ]);
+
         $insertData     = new AcademicYear();
         $insertData->academic_year  = $request->academic_year;
         $insertData->term           = $request->term;
+        $insertData->active          = 'Yes';
 
         $insertData->save();
 
@@ -60,7 +65,7 @@ class AcademicYearController extends Controller
         ]);
 
         Alert::success('Congrats',  $request->academic_year . ' ' . $request->term . ' Successfully Added');
-        return redirect()->route('years.index');
+        return redirect()->route('academics.years');
     }
 
     /**

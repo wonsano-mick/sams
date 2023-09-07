@@ -37,7 +37,9 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('/') }}"><i class="ti-more"></i>View Students</a></li>
-                    <li><a href="{{ route('students.create') }}"><i class="ti-more"></i>Add Student</a></li>
+                    @if (Auth::user()->user_type == 'Admin')
+                        <li><a href="{{ route('students.create') }}"><i class="ti-more"></i>Add Student</a></li>
+                    @endif
                     <li><a href=""><i class="ti-more"></i>Past Students</a></li>
                     <li><a href=""><i class="ti-more"></i>Transfered Students</a></li>
                     <li><a href=""><i class="ti-more"></i>Dismissed Students</a></li>
@@ -53,10 +55,13 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('classes.list') }}"><i class="ti-more"></i>Manage Class</a></li>
-                    <li><a href="" data-toggle="modal" data-target="#AddClass"><i class="ti-more"></i>Add New
-                            Class</a></li>
-                    <li><a href="" data-toggle="modal" data-target="#AddFormMaster"><i class="ti-more"></i>Add
-                            Form Master</a></li>
+                    @if (Auth::user()->user_type == 'Admin')
+                        <li><a href="" data-toggle="modal" data-target="#AddClass"><i class="ti-more"></i>Add New
+                                Class</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#AddFormMaster"><i
+                                    class="ti-more"></i>Add
+                                Form Master</a></li>
+                    @endif
                     @php
                         $classData = App\Models\CurrentClass::get();
                         // $classData = App\Models\CurrentClass::whereIn('current_class', function ($query) {
@@ -83,7 +88,7 @@
                             Program</a></li>
                 </ul>
             </li> --}}
-            <li class="treeview {{ $Prefix == '/academics' ? 'active' : '' }}">
+            {{-- <li class="treeview {{ $Prefix == '/academics' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="calendar"></i>
                     <span>Manage Academic Year</span>
@@ -99,7 +104,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="treeview {{ $Prefix == '/subjects' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="book"></i>
@@ -110,25 +115,46 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('subjects.list') }}"><i class="ti-more"></i>View Subjects</a></li>
-                    <li><a href="" data-toggle="modal" data-target="#AddSubject"><i class="ti-more"></i>Add New
-                            Subject</a></li>
+                    @if (Auth::user()->user_type == 'Admin')
+                        <li><a href="" data-toggle="modal" data-target="#AddSubject"><i class="ti-more"></i>Add
+                                New
+                                Subject</a></li>
+                    @endif
                 </ul>
             </li>
-            <li class="treeview {{ $Prefix == '/staff' ? 'active' : '' }}">
+            <li class="treeview {{ $Prefix == '/academics' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="users"></i>
-                    <span>Manage Staff</span>
+                    <i data-feather="book"></i>
+                    <span>Manage Academic</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('staff.list') }}"><i class="ti-more"></i>View Staff</a></li>
-                    <li><a href="{{ route('staff.subjects.list') }}"><i class="ti-more"></i>Assigned Subjects</a></li>
-                    <li><a href="{{ route('staff.create') }}"><i class="ti-more"></i>Add New
-                            Staff</a></li>
+                    <li><a href="{{ route('academics.years') }}"><i class="ti-more"></i>Academic Year</a></li>
+                    <li><a href="{{ route('academics.sba') }}"><i class="ti-more"></i>SBA</a></li>
+                    <li><a href="{{ route('staff.subjects.list') }}"><i class="ti-more"></i>Progress Report</a></li>
+                    <li><a href="{{ route('staff.create') }}"><i class="ti-more"></i>Combined Reports</a></li>
                 </ul>
             </li>
+            @if (Auth::user()->user_type == 'Admin')
+                <li class="treeview {{ $Prefix == '/staff' ? 'active' : '' }}">
+                    <a href="#">
+                        <i data-feather="users"></i>
+                        <span>Manage Staff</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('staff.list') }}"><i class="ti-more"></i>View Staff</a></li>
+                        <li><a href="{{ route('staff.subjects.list') }}"><i class="ti-more"></i>Assigned Subjects</a>
+                        </li>
+                        <li><a href="{{ route('staff.create') }}"><i class="ti-more"></i>Add New
+                                Staff</a></li>
+                    </ul>
+                </li>
+            @endif
             <li class="treeview {{ $Prefix == '/houses' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="home"></i>
@@ -139,8 +165,10 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('houses.list') }}"><i class="ti-more"></i>View Houses</a></li>
-                    <li><a href="" data-toggle="modal" data-target="#AddHouse"><i class="ti-more"></i>Add New
-                            Houses</a></li>
+                    @if (Auth::user()->user_type == 'Admin')
+                        <li><a href="" data-toggle="modal" data-target="#AddHouse"><i class="ti-more"></i>Add New
+                                Houses</a></li>
+                    @endif
                     @php
                         $HouseData = App\Models\House::get();
                     @endphp
